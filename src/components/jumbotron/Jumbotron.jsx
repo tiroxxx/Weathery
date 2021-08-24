@@ -16,6 +16,9 @@ export default function Jumbotron() {
 
   return (
     <section>
+      <form action="">
+        <input type="text" />
+      </form>
       <img ref={rainRef} id="rain" src="./pictures/background.png" alt="rain" />
       <img ref={waterRef} id="water" src="./pictures/water.png" alt="water" />
       <img ref={rocksRef} id="rocks" src="./pictures/rocks.png" alt="rocks" />

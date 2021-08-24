@@ -1,0 +1,14 @@
+.form {
+    position: absolute;
+    display: flex;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    z-index: 100;
+}
+
+.form input {
+    margin-right: 10px;
+}
