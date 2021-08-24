@@ -1,0 +1,6 @@
+.forecast {
+    position: relative;
+    height: 100vh;
+    background-color: turquoise;
+    z-index: 1000;
+}
