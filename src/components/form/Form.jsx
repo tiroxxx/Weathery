@@ -1,28 +1,40 @@
 import './form.css';
 import { useEffect } from 'react';
-import {searchByCity, searchByLatLon} from '../Api';
+import { searchByCity, searchByLatLon } from '../Api';
 
-export default function Form({input, setInput}) {
-
-  function handleSubmit(e) {
+export default function Form({ input, setInput, setWeather }) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    searchByCity(input);
+    const weatherInfo = await searchByCity(input);
+    console.log(weatherInfo);
+    setWeather((prevWeather) => ({
+      ...prevWeather,
+      name: weatherInfo.name,
+      currentTemp: weatherInfo.main.temp,
+      feelsLikeTemp: weatherInfo.main.feels_like,
+      currentWeather: weatherInfo.weather[0].description,
+      minTemp: weatherInfo.main.temp_min,
+      maxTemp: weatherInfo.main.temp_max,
+      icon: weatherInfo.weather[0].icon,
+    }));
   }
+  //
 
-  function success(position) {
+  async function success(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
 
-    searchByLatLon(lat,lon)
+    const weatherInfo = await searchByLatLon(lat, lon);
+    console.log(weatherInfo);
   }
 
   function error() {
-      console.log("can retrieve location");
+    console.log('can retrieve location');
   }
 
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(success, error)
+      navigator.geolocation.getCurrentPosition(success, error);
     }
   }, []);
 

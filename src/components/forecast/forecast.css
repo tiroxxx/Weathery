@@ -1,6 +1,17 @@
 .forecast {
-    position: relative;
-    height: 100vh;
-    background-color: turquoise;
-    z-index: 1000;
+  padding-top: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: turquoise;
+  z-index: 1000;
+}
+
+.card {
+  position: relative;
+  max-width: 300px;
+  width: 80%;
+  height: 300px;
+  background-color: red;
 }
