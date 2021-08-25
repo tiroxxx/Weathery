@@ -1,21 +1,43 @@
-import "./form.css"
-import { useState } from "react";
+import './form.css';
+import { useEffect } from 'react';
+import {searchByCity, searchByLatLon} from '../Api';
 
-export default function Form() {
+export default function Form({input, setInput}) {
 
-    const [input, setInput] = useState("")
+  function handleSubmit(e) {
+    e.preventDefault();
+    searchByCity(input);
+  }
 
-    function handleSubmit (e) {
-        e.preventDefault();
-        console.log("submitted");
+  function success(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    searchByLatLon(lat,lon)
+  }
+
+  function error() {
+      console.log("can retrieve location");
+  }
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error)
     }
+  }, []);
 
-    return (
-        <div className="form">
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Orlando, FL"/>
-                <button>Search</button>
-            </form>
-        </div>
-    )
+  return (
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <input
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
+          type="text"
+          placeholder="Orlando, FL"
+        />
+        <button>Search</button>
+      </form>
+    </div>
+  );
 }

@@ -1,14 +1,20 @@
 import './App.css';
-import Api from './components/Api.jsx';
+import { useState } from 'react';
 import Jumbotron from './components/jumbotron/Jumbotron';
 import Forecast from './components/forecast/Forecast';
 import Form from './components/form/Form';
 
 function App() {
+  const [input, setInput] = useState('');
+  const [weather, setWeather] = useState({
+    currentTemp: '',
+    feelsLikeTemp: '',
+    currentWeather: '',
+  });
 
   return (
     <div className="App">
-      <Form />
+      <Form input={input} setInput={setInput} />
       <Jumbotron />
       <Forecast />
     </div>
